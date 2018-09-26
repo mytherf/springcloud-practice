@@ -7,7 +7,7 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 
 import de.codecentric.boot.admin.server.config.AdminServerProperties;
 
-@Configuration
+//@Configuration
 public class SecuritySecureConfig extends WebSecurityConfigurerAdapter {
 
     private final String adminContextPath;

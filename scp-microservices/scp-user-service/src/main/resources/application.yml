@@ -4,7 +4,8 @@ server:
 spring:
   application:
     name: scp-user-service
-    
+  profiles: 
+      active: dev    
   # 数据库连接相关配置
   datasource: 
     druid:
@@ -40,7 +41,7 @@ spring:
       stat-view-servlet:
         enabled: true
         login-username: admin
-        login-password: mxr@12345678
+        login-password: admin123
       
         
 # mybatis 配置
@@ -78,3 +79,9 @@ management:
     web:
       exposure: 
         include: "*"
+        
+        
+swagger:
+  title: scp-user-Service
+  description: spring cloud practice user service
+  version: 1.0
