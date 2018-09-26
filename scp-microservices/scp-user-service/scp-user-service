@@ -1,0 +1,54 @@
+#!/bin/sh
+
+#chkconfig: 2345 44 56
+#description: scp-user-service command
+#processname: scp-user-service
+
+export JAVA_HOME=/usr/java/jdk1.8.0_101  
+export PATH=$JAVA_HOME/bin:$PATH
+SERVICE_NAME=scp-user-service
+HOME=/data/scp/scp-user-service
+PATH_TO_JAR=/publish/scp-user-service.jar
+CONFIG=$HOME/services/scp-user-config.yml
+ERROR_LOG=$HOME/logs/scp-sys.err
+MEM_CONFIG="-Xmx1024m -Xms1024m"
+GC_LOG="-Xloggc:${HOME}/gc_log/gc-${SERVICE_NAME}.log -XX:+PrintGCDateStamps -XX:+PrintGCDetails"
+
+case $1 in
+    start)
+		PID=$(ps -ef | grep ${SERVICE_NAME} | grep 'java' |grep -v grep | awk '{ print $2 }')
+        if [ -z "${PID}" ]; then
+            echo "Starting $SERVICE_NAME ..."
+            cd $HOME
+            nohup java $MEM_CONFIG $GC_LOG -Djava.security.egd=file:/dev/./urandom -Dspring.config.location=$CONFIG -jar $PATH_TO_JAR > /dev/null 2> $ERROR_LOG &
+            echo "$SERVICE_NAME started ..."
+        else
+            echo "$SERVICE_NAME is already running ..."
+        fi
+    ;;
+    stop)
+		PID=$(ps -ef | grep ${SERVICE_NAME} | grep 'java' |grep -v grep | awk '{ print $2 }')
+        if [ -n "${PID}" ]; then
+            echo "$SERVICE_NAME stoping ..."
+            kill -9 ${PID};
+            echo "$SERVICE_NAME stopped ..."
+        else
+            echo "$SERVICE_NAME is not running ..."
+        fi
+    ;;
+    restart)
+		PID=$(ps -ef | grep ${SERVICE_NAME} | grep 'java' |grep -v grep | awk '{ print $2 }')
+        if [ -n "$PID" ]; then
+            echo "$SERVICE_NAME stopping ...";
+            kill -9 $PID;
+            echo "$SERVICE_NAME stopped ...";
+            echo "$SERVICE_NAME starting ..."
+            cd $HOME
+            nohup java $MEM_CONFIG $GC_LOG -Djava.security.egd=file:/dev/./urandom -Dspring.config.location=$CONFIG -jar $PATH_TO_JAR > /dev/null 2> $ERROR_LOG &
+            echo "$SERVICE_NAME started ..."
+        else
+            echo "$SERVICE_NAME is not running ..."
+        fi
+    ;;
+esac
+

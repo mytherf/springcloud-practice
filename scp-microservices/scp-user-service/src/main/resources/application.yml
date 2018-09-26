@@ -1,0 +1,80 @@
+server:
+  port: 10010
+
+spring:
+  application:
+    name: scp-user-service
+    
+  # 数据库连接相关配置
+  datasource: 
+    druid:
+      # JDBC 配置
+      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+      url: jdbc:sqlserver://192.168.0.251:1433;DatabaseName=userdata
+      username: sa
+      password: $MXR02%
+      # 连接池配置
+      initial-size: 5 # 初始化时建立物理连接的个数
+      max-active: 20  # 最大连接池数量
+      min-idle: 10    # 最小连接池数量
+      max-wait: 60000    # 获取连接时最大等待时间，单位毫秒
+      # 是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭。
+      pool-prepared-statements: true
+      # 要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。
+      max-pool-prepared-statement-per-connection-size: 50
+      # 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。
+      test-while-idle: true  
+      # 用来检测连接是否有效的sql，要求是一个查询语句
+      validation-query: select 'x'  
+      # 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。
+      test-on-borrow: false
+      # 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。
+      test-on-return: false
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 连接保持空闲而不被驱逐的最小时间
+      min-evictable-idle-time-millis: 300000
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计
+      filters: stat,wall
+      # druid连接池监控
+      stat-view-servlet:
+        enabled: true
+        login-username: admin
+        login-password: mxr@12345678
+      
+        
+# mybatis 配置
+mybatis:
+  type-aliases-package: com.scp.user.model #扫描实体类路径
+  mapper-locations: classpath:mapper/*.xml #XML配置文件路径
+# 通用 Mapper 配置
+mapper:
+  mappers: 
+    - com.scp.user.util.MyMapper
+  not-empty: false
+  identity: SQLSERVER
+# 分页插件配置
+pagehelper:
+  helperDialect: sqlserver2012
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+eureka:
+    client:
+        service-url:
+            defaultZone: http://localhost:10000/eureka/    # 指定注册中心的地址
+    instance:
+        prefer-ip-address: true # 将自己的IP注册到Eureka Server, false注册操作系统的hostname
+        instance-id: ${spring.cloud.client.ip-address}:${server.port}        # 将Instance ID设置成IP:端口的形式
+           
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure: 
+        include: "*"

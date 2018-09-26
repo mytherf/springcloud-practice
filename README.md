@@ -1,5 +1,7 @@
 ### springcloud-practice
 
+- 注册中心：http://localhost:10000/
+
 - init spring boot project
 - init eureka server
 - init service project

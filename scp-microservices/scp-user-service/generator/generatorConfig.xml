@@ -1,0 +1,35 @@
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+	<context id="sqlserver" targetRuntime="MyBatis3Simple"
+		defaultModelType="flat">
+
+		<property name="beginningDelimiter" value="`" />
+		<property name="endingDelimiter" value="`" />
+
+		<plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+			<property name="mappers" value="com.scp.user.util.MyMapper" />
+			<property name="caseSensitive" value="true" />
+		</plugin>
+
+		<jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+			connectionURL="jdbc:sqlserver://192.168.0.251:1433;DatabaseName=userdata"
+			userId="sa" password="$MXR02%">
+		</jdbcConnection>
+
+		<javaModelGenerator targetPackage="com.scp.user.model"
+			targetProject="src/main/java" />
+
+		<sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources" />
+
+		<javaClientGenerator targetPackage="com.scp.user.mapper"
+			targetProject="src/main/java" type="XMLMAPPER" />
+
+		<table tableName="user_reg_stat" >
+
+		</table>
+	</context>
+</generatorConfiguration>

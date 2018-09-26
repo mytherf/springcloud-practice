@@ -1,0 +1,37 @@
+server:
+  port: 10002
+spring:
+  application:
+    name: scp-admin-server
+  security:
+    user:
+      name: "admin"
+      password: "admin"
+  mail:
+    host: smtp.qq.com
+    username: 335146909@qq.com
+    password: qdxlzanhkrfcbjff
+  boot:
+    admin:
+      notify:
+        mail:
+          to: 335146909@qq.com
+          from: 335146909@qq.com
+eureka:  
+  instance:
+    leaseRenewalIntervalInSeconds: 10 #心跳间隔时间,默认是30秒
+    prefer-ip-address: true # 将自己的IP注册到Eureka Server, false注册操作系统的hostname
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}  # 将Instance ID设置成IP:端口的形式
+  client:
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://localhost:10000/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  
+  endpoint:
+    health:
+      show-details: always
