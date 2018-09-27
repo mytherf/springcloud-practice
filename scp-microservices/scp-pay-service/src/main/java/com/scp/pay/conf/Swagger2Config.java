@@ -1,4 +1,4 @@
-package com.scp.user.conf;
+package com.scp.pay.conf;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

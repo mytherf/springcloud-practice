@@ -24,6 +24,7 @@
 
 	<modules>
 		<module>scp-user-service</module>
+		<module>scp-pay-service</module>
 	</modules>
 
 	<dependencies>

@@ -1,4 +1,4 @@
-package com.scp.user.model;
+package com.scp.pay.model;
 
 import java.util.Date;
 import javax.persistence.*;

@@ -1,6 +1,7 @@
 ### springcloud-practice
 
 - 注册中心：http://localhost:10000/
+- spring boot admin：http://localhost:10002/
 - 监控：http://192.168.3.240:10002/actuator/health
 - 接口：http://192.168.3.240:10010/swagger-ui.html
 - 数据库连接池：http://192.168.3.240:10010/druid/index.html
@@ -145,7 +146,7 @@
 
 - 参考文档：https://segmentfault.com/a/1190000003944843
 
-
+---
 ####  RESTFUL架构规范
 
 ###### HTTP动词

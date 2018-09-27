@@ -1,6 +1,6 @@
-package com.scp.user.controller;
+package com.scp.pay.controller;
 
-import com.scp.user.service.UserAccountService;
+import com.scp.pay.service.UserAccountService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,8 +27,7 @@ public class UserAccountController {
   public String home(@RequestParam(value = "name", defaultValue = "forezp") String name,
       @RequestParam(value = "time", defaultValue = "1000") String time) {
 
-     userAccountService.checkSqlCollation();
+    return userAccountService.hi(name, time, port);
 
-     return null;
   }
 }

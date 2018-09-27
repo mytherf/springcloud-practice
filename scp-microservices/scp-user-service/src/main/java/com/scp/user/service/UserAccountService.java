@@ -1,9 +1,7 @@
 package com.scp.user.service;
 
-import com.scp.user.mapper.UserRegStatMapper;
-import com.scp.user.model.UserRegStat;
+import com.scp.user.mapper.UserAccountMapper;
 import com.scp.user.util.BaseService;
-import com.scp.user.util.JsonUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,25 +10,16 @@ import org.springframework.stereotype.Service;
 public class UserAccountService extends BaseService {
 
   @Autowired
-  private UserRegStatMapper userRegStatMapper;
+  private UserAccountMapper userAccountMapper;
 
-  public String hi(String name, String time, String port) {
-    
-    try {
-      Thread.sleep(Integer.valueOf(time));
-      UserRegStat user = new UserRegStat();
-      user.setId(31);
-      UserRegStat entity = userRegStatMapper.selectOne(user);
-      logger.info("result={}", JsonUtil.toJson(entity));
-      
-    } catch (NumberFormatException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    } catch (InterruptedException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-    
-    return "hi " + name + " ,i am from port:" + port + time;
+  
+  /**
+   * 模拟两个表连接，但是分别使用"Chinese_PRC_90_CI_AS" and "Chinese_PRC_CI_AS"排序规则
+   * @author mytherf
+   * @date 2018-09-27 43:16
+   *
+   */
+  public void checkSqlCollation() {
+    userAccountMapper.checkSqlCollation();
   }
 }

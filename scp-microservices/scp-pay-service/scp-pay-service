@@ -6,10 +6,10 @@
 
 export JAVA_HOME=/usr/java/jdk1.8.0_101  
 export PATH=$JAVA_HOME/bin:$PATH
-SERVICE_NAME=scp-user-service
-HOME=/data/scp/scp-user-service
-PATH_TO_JAR=$HOME/services/scp-user-service.jar
-CONFIG=$HOME/services/scp-user-config.yml
+SERVICE_NAME=scp-pay-service
+HOME=/data/scp/scp-pay-service
+PATH_TO_JAR=$HOME/services/scp-pay-service.jar
+CONFIG=$HOME/services/scp-pay-config.yml
 ERROR_LOG=$HOME/logs/scp-sys.err
 GC_LOG="-Xloggc:${HOME}/logs/scp-gc.log -XX:+PrintGCDateStamps -XX:+PrintGCDetails"
 MEM_CONFIG="-Xmx1024m -Xms1024m"
