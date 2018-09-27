@@ -11,9 +11,9 @@ spring:
     druid:
       # JDBC 配置
       driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-      url: jdbc:sqlserver://192.168.0.251:1433;DatabaseName=userdata
-      username: sa
-      password: $MXR02%
+      url: jdbc:sqlserver://192.168.0.251:1433;DatabaseName=test
+      username: testUser
+      password: abcd1234@
       # 连接池配置
       initial-size: 5 # 初始化时建立物理连接的个数
       max-active: 20  # 最大连接池数量

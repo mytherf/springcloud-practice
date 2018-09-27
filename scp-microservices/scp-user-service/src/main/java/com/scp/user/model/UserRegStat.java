@@ -5,6 +5,7 @@ import javax.persistence.*;
 
 @Table(name = "user_reg_stat")
 public class UserRegStat {
+    @Id
     private Integer id;
 
     @Column(name = "reg_date")
@@ -18,6 +19,9 @@ public class UserRegStat {
 
     @Column(name = "reg_num")
     private Integer regNum;
+
+    @Column(name = "create_time")
+    private Date createTime;
 
     /**
      * @return id
@@ -87,5 +91,19 @@ public class UserRegStat {
      */
     public void setRegNum(Integer regNum) {
         this.regNum = regNum;
+    }
+
+    /**
+     * @return create_time
+     */
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    /**
+     * @param createTime
+     */
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

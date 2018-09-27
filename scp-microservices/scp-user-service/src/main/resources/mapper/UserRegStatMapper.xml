@@ -5,10 +5,11 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <result column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="reg_date" jdbcType="DATE" property="regDate" />
     <result column="reg_type" jdbcType="INTEGER" property="regType" />
     <result column="reg_area" jdbcType="VARCHAR" property="regArea" />
     <result column="reg_num" jdbcType="INTEGER" property="regNum" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
 </mapper>

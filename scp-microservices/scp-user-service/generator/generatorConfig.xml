@@ -16,8 +16,8 @@
 		</plugin>
 
 		<jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-			connectionURL="jdbc:sqlserver://192.168.0.251:1433;DatabaseName=userdata"
-			userId="sa" password="$MXR02%">
+			connectionURL="jdbc:sqlserver://192.168.0.251:1433;DatabaseName=test"
+			userId="testUser" password="abcd1234@">
 		</jdbcConnection>
 
 		<javaModelGenerator targetPackage="com.scp.user.model"
