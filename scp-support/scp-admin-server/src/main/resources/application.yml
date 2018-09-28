@@ -1,12 +1,11 @@
 server:
   port: 10002
+
 spring:
   application:
     name: scp-admin-server
-  security:
-    user:
-      name: "admin"
-      password: "admin"
+  profiles: 
+    active: secure
   mail:
     host: smtp.qq.com
     username: 335146909@qq.com
@@ -20,6 +19,7 @@ spring:
 eureka:  
   instance:
     leaseRenewalIntervalInSeconds: 10 #心跳间隔时间,默认是30秒
+    health-check-url-path: /actuator/health #2.0后actuator的地址发生了变化
     prefer-ip-address: true # 将自己的IP注册到Eureka Server, false注册操作系统的hostname
     instance-id: ${spring.cloud.client.ip-address}:${server.port}  # 将Instance ID设置成IP:端口的形式
   client:
@@ -27,6 +27,7 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:10000/eureka/
 
+# 2.0开始，actuator默认不开放，所以要设置为开放
 management:
   endpoints:
     web:
@@ -34,4 +35,25 @@ management:
         include: "*"  
   endpoint:
     health:
-      show-details: always
+      show-details: ALWAYS
+
+---
+spring:
+  profiles: insecure
+
+---
+# admin登录的用户名和密码
+spring:
+  profiles: secure
+  security:
+    user:
+      name: "admin"
+      password: "admin"
+
+# 注册给eureka的时候告诉eureka自己的密码
+eureka:
+  instance:
+    metadata-map:
+      "user.name": ${spring.security.user.name}         #These two are needed so that the server
+      "user.password": ${spring.security.user.password} #can access the protected client endpoints
+      
